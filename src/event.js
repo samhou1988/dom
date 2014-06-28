@@ -29,7 +29,40 @@
             } else {
                 ele['on' + type] = null;
             }
-        }
+        },
+
+        // get event object
+        getEvent: function (event) {
+            return event ? event : window.event;
+        },
+
+        // get event type
+        getTyep: function (event) {
+            return event.type;
+        },
+
+        // get event target
+        getElement: function (event) {
+            return event ? event.target : event.srcElement;
+        },
+
+        // stop Propagation
+        stopPropagation: function (event) {
+            if (event.stopPropagation) {
+                event.stopPropagation();
+            } else {
+                event.cancelBubble = true;
+            }
+        },
+
+        // prevent default behavior
+        preventDefault: function (event) {
+            if (event.preventDefault) {
+                event.preventDefault();
+            } else {
+                event.returnValue = false;
+            }
+        },
     };
 
     w.eventUtil = eventUtil;
