@@ -32,6 +32,6 @@
         }
     };
 
-    w.eventUtil = eventUtl;
+    w.eventUtil = eventUtil;
 
 }) (window);
