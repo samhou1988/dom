@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>抽奖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .title {
+            width: 400px;
+            height: 100px;
+            margin: 70px auto;
+            padding-top: 30px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #f00;
+        }
+
+        .btns {
+            width: 190px;
+            height: 30px;
+            margin: 0 auto;
+        }
+
+        .btns span {
+            display: block;
+            float: left;
+            width: 80px;
+            height: 25px;
+            line-height: 25px;
+            background: #036;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            margin-right: 10px;
+            font-size: 14px;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="title" class="title">开始抽奖啦</div>
+    <div class="btns">
+        <span id="play">开始</span>
+        <span id="stop">结束</span>
+    </div>
+
+    <script>
+        (function (window, document) {
+            var data = ['Phone5', 'iPad', '三星笔记本', '佳能相机', '惠普参与', '谢谢参与', '50充值卡', '1000超市购物卡'];
+            var flag = false;
+
+            // 定时器
+            var timer = null;
+
+            var play = document.getElementById('play'),
+                stop = document.getElementById('stop');
+
+            var backgroundColor = play.style.background;
+
+            // 开始抽奖
+            play.onclick = playFun;
+
+            // 停止抽奖
+            stop.onclick = stopFun;
+
+            // 键盘事件
+            document.onkeyup = function (e) {
+                e = e || window.event;
+                console.log(e.keyCode);
+                if (e.keyCode == 13) {
+                    if (!flag) {
+                        playFun();
+                        flag = true;
+                    } else {
+                        stopFun();
+                        flag = false;
+                    }
+                }
+            }
+            
+            // function helper
+            function playFun() {
+                var self = this;
+                stopFun();
+                timer = setInterval(function () {
+                    if (data.length) {
+                        var random = Math.random();
+                    var index = Math.floor(random * data.length);
+                    var title = document.getElementById('title');
+                    title.innerHTML = title.innerHTML + "  " + data[index];
+                    data.splice(index, 1);
+                    } else {
+                        clearInterval(timer);
+                    }
+                }, 50);
+
+                var play = document.getElementById('play');
+                play.style.backgroundColor = "#999";
+                // self.style.backgroundColor = "#999";
+            }
+
+            function stopFun() {
+                clearInterval(timer);
+                var play = document.getElementById('play');
+                play.style.backgroundColor = "#036";
+            }
+        })(window, document);
+    </script>
+</body>
+</html>
