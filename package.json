@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/jackhou2007/dom/issues"
   },
-  "homepage": "https://github.com/jackhou2007/dom"
+  "homepage": "https://github.com/jackhou2007/dom",
+  "devDependencies": {
+    "express": "^4.10.6"
+  }
 }
